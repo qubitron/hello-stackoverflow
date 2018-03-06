@@ -16,7 +16,22 @@ shutil.rmtree("survey2017")
 import os
 os.remove("survey2017.zip")
 
+import pandas as pd
+data = pd.read_csv('survey2017.csv')
+filtered = data[data['HaveWorkedLanguage'].notnull()]
 
+python = filtered[filtered['HaveWorkedLanguage'].str.contains("Python")]
 
+frameworks = { 'None': 0 }
+for index, row in python.iterrows():
+    if pd.isnull(row['HaveWorkedFramework']):
+        frameworks['None'] += 1
+        continue
 
-print("Hello world!")
+    for framework in row['HaveWorkedFramework'].split('; '):
+        if framework not in frameworks:
+            frameworks[framework] = 1
+        else:
+            frameworks[framework] += 1
+
+print(frameworks)
