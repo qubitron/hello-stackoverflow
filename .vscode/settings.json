@@ -1,0 +1,11 @@
+{
+    "python.pythonPath": "${workspaceFolder}\\env\\Scripts\\python.exe",
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        "./tests",
+        "-p",
+        "test_*.py"
+    ],
+    "python.unitTest.unittestEnabled": true,
+}
