@@ -26,7 +26,7 @@ def getFrameworksByLanguage(language):
     python = filtered[filtered['HaveWorkedLanguage'].str.contains(language)]
 
     frameworks = { 'None': 0 }
-    for index, row in python.iterrows():
+    for _, row in python.iterrows():
         if pd.isnull(row['HaveWorkedFramework']):
             frameworks['None'] += 1
             continue
