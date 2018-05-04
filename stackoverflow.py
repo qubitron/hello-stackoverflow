@@ -39,7 +39,7 @@ def survey_csvname(year):
     return 'survey{}.csv'.format(year)
 
 def download_survey(year):
-    print("Downloading " + str(year))
+    print("Downloading {year}")
     request = requests.get(urls[year])
     with open("survey.zip", "wb") as file:
         file.write(request.content) 
@@ -54,7 +54,8 @@ def download_survey(year):
 def languages_breakdown(year):
     if not os.path.exists(survey_csvname(year)):
         download_survey(year)
-    print("Processing " + str(year))
+
+    print("Processing {year}")
     data=pd.read_csv(survey_csvname(year), encoding='latin1')
 
     if year >= 2016:
