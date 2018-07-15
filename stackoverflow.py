@@ -25,7 +25,7 @@ filenames = {
     2011: '2011 Stack Overflow Survey Results.csv'
 }
 
-questionNames = {
+question_names = {
     2017: 'HaveWorkedLanguage',
     2016: 'tech_do',
     2015: 'Select all that apply',
@@ -39,7 +39,7 @@ def survey_csvname(year):
     return 'survey{}.csv'.format(year)
 
 def download_survey(year):
-    print("Downloading {year}")
+    print(f"Downloading {year}")
     request = requests.get(urls[year])
     with open("survey.zip", "wb") as file:
         file.write(request.content) 
@@ -55,12 +55,12 @@ def languages_breakdown(year):
     if not os.path.exists(survey_csvname(year)):
         download_survey(year)
 
-    print("Processing {year}")
+    print(f"Processing {year}")
     data=pd.read_csv(survey_csvname(year), encoding='latin1')
 
     if year >= 2016:
         # Languages are semicolon separated list in a single column
-        languages = data[questionNames[year]].str.split(';', expand=True)
+        languages = data[question_names[year]].str.split(';', expand=True)
     else:
         # Languages are a set of columns, one column per language + other
         # First get a list of column names that represent the set of languages/technology
@@ -68,7 +68,7 @@ def languages_breakdown(year):
         columnNames = []
 
         # Iterate through columns until we get to the language/tech question       
-        while data.columns[current] != questionNames[year]:
+        while data.columns[current] != question_names[year]:
             current += 1
 
         # Add all columns except for other (which is the last one)
