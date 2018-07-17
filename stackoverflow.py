@@ -83,7 +83,7 @@ def languages_breakdown(year):
     summary = languages.apply(pd.Series.value_counts)
     summary = pd.DataFrame({'count': summary.sum(axis=1).groupby(lambda x: x.strip()).sum()})
 
-    #total = data[data[questionNames[year]].notnull()].shape[0]  
+    #total = data[data[question_names[year]].notnull()].shape[0]  
     total = data.shape[0]
     summary['percent'] = summary['count']/total*100
 
