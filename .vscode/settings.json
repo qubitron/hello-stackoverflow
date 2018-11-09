@@ -1,4 +1,0 @@
-{
-    "python.pythonPath": "${workspaceFolder}/env/bin/python",
-    "python.jediEnabled": true,
-}
